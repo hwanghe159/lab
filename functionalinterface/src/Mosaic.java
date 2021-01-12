@@ -8,10 +8,6 @@ public class Mosaic {
         this.tiles = tiles;
     }
 
-    public int getSize() {
-        return tiles.size();
-    }
-
     public List<Tile> getTiles() {
         return tiles;
     }
