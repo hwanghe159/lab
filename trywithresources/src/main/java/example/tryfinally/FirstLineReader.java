@@ -1,4 +1,4 @@
-package trywithresources;
+package example.tryfinally;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -11,8 +11,10 @@ public class FirstLineReader {
     }
 
     public String read() throws IOException {
-        try (BufferedReader br = this.bufferedReader) {
-            return br.readLine();
+        try {
+            return bufferedReader.readLine();
+        } finally {
+            bufferedReader.close();
         }
     }
 }

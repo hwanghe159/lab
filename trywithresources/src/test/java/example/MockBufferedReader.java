@@ -1,4 +1,4 @@
-package tryfinally;
+package example;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,7 +9,7 @@ public class MockBufferedReader extends BufferedReader {
         super(new Reader() {
             @Override
             public int read(char[] cbuf, int off, int len) throws IOException {
-                throw new IOException("read() 오류!");
+                throw new IOException("readLine() 오류!");
             }
 
             @Override
