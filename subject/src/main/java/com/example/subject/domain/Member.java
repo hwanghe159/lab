@@ -32,4 +32,8 @@ public class Member {
         this.email = email;
         this.gender = gender;
     }
+
+    public boolean isCorrectPassword(String password) {
+        return this.password.equals(password);
+    }
 }
