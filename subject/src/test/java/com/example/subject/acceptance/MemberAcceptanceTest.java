@@ -1,10 +1,10 @@
 package com.example.subject.acceptance;
 
 import com.example.subject.auth.dto.LogoutRequest;
-import com.example.subject.domain.Gender;
+import com.example.subject.member.domain.Gender;
 import com.example.subject.auth.dto.LoginRequest;
-import com.example.subject.dto.MemberCreateRequest;
-import com.example.subject.dto.MemberResponse;
+import com.example.subject.member.dto.MemberCreateRequest;
+import com.example.subject.member.dto.MemberResponse;
 import com.example.subject.auth.dto.TokenResponse;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -18,18 +18,12 @@ import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 
+import static com.example.subject.fixture.MemberFixture.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class MemberAcceptanceTest {
-
-    public static final String TEST_NAME = "name";
-    public static final String TEST_NICKNAME = "nickname";
-    public static final String TEST_PASSWORD = "password";
-    public static final String TEST_PHONE_NUMBER = "phoneNumber";
-    public static final String TEST_EMAIL = "email";
-    public static final Gender TEST_GENDER = Gender.MALE;
 
     @LocalServerPort
     int port;
@@ -50,7 +44,7 @@ public class MemberAcceptanceTest {
     @Test
     void manageMember() throws JsonProcessingException {
         //when: 회원 가입을 한다
-        Long memberId = join(TEST_NAME, TEST_NICKNAME, TEST_PASSWORD, TEST_PHONE_NUMBER, TEST_EMAIL, TEST_GENDER);
+        Long memberId = join(TEST_MEMBER_NAME, TEST_NICKNAME, TEST_PASSWORD, TEST_PHONE_NUMBER, TEST_EMAIL, TEST_GENDER);
         //then: 회원이 추가된다
         MemberResponse savedMember = find(memberId);
         assertThat(savedMember.getId()).isEqualTo(memberId);

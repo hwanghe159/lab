@@ -1,13 +1,15 @@
-package com.example.subject.controller;
+package com.example.subject.member.controller;
 
-import com.example.subject.dto.MemberCreateRequest;
-import com.example.subject.dto.MemberResponse;
-import com.example.subject.service.MemberService;
+import com.example.subject.member.dto.MemberCreateRequest;
+import com.example.subject.member.dto.MemberResponse;
+import com.example.subject.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -22,8 +24,13 @@ public class MemberController {
                 .body(memberResponse.getId());
     }
 
+    @GetMapping("/members")
+    public ResponseEntity<List<MemberResponse>> getMembers(Pageable pageable) {
+        return ResponseEntity.ok(memberService.findAll(pageable));
+    }
+
     @GetMapping("/members/{id}")
-    public ResponseEntity<MemberResponse> find(@PathVariable Long id) {
+    public ResponseEntity<MemberResponse> getMember(@PathVariable Long id) {
         return ResponseEntity.ok(memberService.find(id));
     }
 }

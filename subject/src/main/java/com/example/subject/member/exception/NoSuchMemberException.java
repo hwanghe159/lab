@@ -1,4 +1,4 @@
-package com.example.subject.exception;
+package com.example.subject.member.exception;
 
 public class NoSuchMemberException extends RuntimeException {
     public NoSuchMemberException(Long memberId) {

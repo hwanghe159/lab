@@ -1,7 +1,7 @@
-package com.example.subject.dto;
+package com.example.subject.member.dto;
 
-import com.example.subject.domain.Gender;
-import com.example.subject.domain.Member;
+import com.example.subject.member.domain.Gender;
+import com.example.subject.member.domain.Member;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

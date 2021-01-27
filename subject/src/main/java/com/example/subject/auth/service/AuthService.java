@@ -4,9 +4,9 @@ import com.example.subject.auth.dto.LoginRequest;
 import com.example.subject.auth.dto.LogoutRequest;
 import com.example.subject.auth.dto.TokenResponse;
 import com.example.subject.auth.exception.PasswordNotMatchException;
-import com.example.subject.domain.Member;
-import com.example.subject.exception.NoSuchMemberException;
-import com.example.subject.repository.MemberRepository;
+import com.example.subject.member.domain.Member;
+import com.example.subject.member.exception.NoSuchMemberException;
+import com.example.subject.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
