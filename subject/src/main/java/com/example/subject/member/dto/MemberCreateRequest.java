@@ -18,6 +18,13 @@ public class MemberCreateRequest {
     private Gender gender;
 
     public Member toEntity() {
-        return new Member(name, nickname, password, phoneNumber, email, gender);
+        return Member.builder()
+                .name(name)
+                .nickname(nickname)
+                .password(password)
+                .phoneNumber(phoneNumber)
+                .email(email)
+                .gender(gender)
+                .build();
     }
 }

@@ -1,8 +1,6 @@
 package com.example.subject.member.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -10,6 +8,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
+@ToString
 public class Member {
 
     @Id
@@ -32,6 +31,7 @@ public class Member {
 
     private Gender gender;
 
+    @Builder
     public Member(String name, String nickname, String password, String phoneNumber, String email, Gender gender) {
         this.name = name;
         this.nickname = nickname;

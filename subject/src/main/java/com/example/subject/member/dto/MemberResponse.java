@@ -2,6 +2,7 @@ package com.example.subject.member.dto;
 
 import com.example.subject.member.domain.Gender;
 import com.example.subject.member.domain.Member;
+import com.example.subject.order.dto.OrderResponse;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,6 +18,7 @@ public class MemberResponse {
     private String phoneNumber;
     private String email;
     private Gender gender;
+    private OrderResponse lastOrder;
 
     public MemberResponse(Member member) {
         this.id = member.getId();
