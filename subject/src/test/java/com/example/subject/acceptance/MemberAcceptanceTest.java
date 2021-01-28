@@ -5,6 +5,7 @@ import com.example.subject.auth.dto.LogoutRequest;
 import com.example.subject.auth.dto.TokenResponse;
 import com.example.subject.member.domain.Gender;
 import com.example.subject.member.dto.MemberCreateRequest;
+import com.example.subject.member.dto.MemberDetailResponse;
 import com.example.subject.member.dto.MemberResponse;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -49,7 +50,7 @@ public class MemberAcceptanceTest {
         //when: 회원 가입을 한다
         Long memberId = join(TEST_MEMBER_NAME, TEST_NICKNAME, TEST_PASSWORD, TEST_PHONE_NUMBER, TEST_EMAIL, TEST_GENDER);
         //then: 회원이 추가된다
-        MemberResponse savedMember = find(memberId);
+        MemberDetailResponse savedMember = find(memberId);
         assertThat(savedMember.getId()).isEqualTo(memberId);
 
         //given: 회원이 존재한다
@@ -115,7 +116,7 @@ public class MemberAcceptanceTest {
         //@formatter:on
     }
 
-    private MemberResponse find(Long memberId) {
+    private MemberDetailResponse find(Long memberId) {
         //@formatter:off
         return
                 given()
@@ -124,7 +125,7 @@ public class MemberAcceptanceTest {
                 .then()
                         .log().all()
                         .statusCode(HttpStatus.OK.value())
-                        .extract().as(MemberResponse.class);
+                        .extract().as(MemberDetailResponse.class);
         //@formatter:on
     }
 

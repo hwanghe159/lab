@@ -1,6 +1,7 @@
 package com.example.subject.member.controller;
 
 import com.example.subject.member.dto.MemberCreateRequest;
+import com.example.subject.member.dto.MemberDetailResponse;
 import com.example.subject.member.dto.MemberResponse;
 import com.example.subject.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -32,7 +33,7 @@ public class MemberController {
     }
 
     @GetMapping("/members/{id}")
-    public ResponseEntity<MemberResponse> getMember(@PathVariable Long id) {
-        return ResponseEntity.ok(memberService.find(id));
+    public ResponseEntity<MemberDetailResponse> getMemberDetail(@PathVariable Long id) {
+        return ResponseEntity.ok(memberService.getDetail(id));
     }
 }

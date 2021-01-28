@@ -8,6 +8,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.context.jdbc.Sql;
 
 import java.util.Arrays;
 
@@ -18,6 +19,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 @DataJpaTest
+@Sql("/truncate.sql")
 class OrderRepositoryTest {
 
     @Autowired
@@ -45,6 +47,7 @@ class OrderRepositoryTest {
         assertThat(orderRepository.findByMemberId(1L)).isNotEmpty();
     }
 
+    @DisplayName("회원 엔티티로 주문을 조회할 수 있어야 한다")
     @Test
     void findByMemberTest() {
         member = Member.builder()
@@ -61,6 +64,7 @@ class OrderRepositoryTest {
         assertThat(orderRepository.findByMember(member)).isNotEmpty();
     }
 
+    @DisplayName("회원 번호로 마지막 주문을 조회할 수 있어야 한다")
     @Test
     void findLastOrderBy() {
         Member member1 = Member.builder()
@@ -82,10 +86,13 @@ class OrderRepositoryTest {
         memberRepository.saveAll(Arrays.asList(member1, member2));
 
         Order order1 = new Order("1", "이름1", member1);
+        orderRepository.save(order1);
         Order order2 = new Order("2", "이름2", member1);
+        orderRepository.save(order2);
         Order order3 = new Order("3", "이름3", member2);
+        orderRepository.save(order3);
         Order order4 = new Order("4", "이름4", member2);
-        orderRepository.saveAll(Arrays.asList(order1, order2, order3, order4));
+        orderRepository.save(order4);
 
         Order lastOrderOfMemberOne = orderRepository.findLastOrderBy(1L);
         Order lastOrderOfMemberTwo = orderRepository.findLastOrderBy(2L);

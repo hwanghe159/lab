@@ -17,6 +17,6 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
 
     Optional<Order> findByOrderNumber(String orderNumber);
 
-    @Query("select o from ORDERS o where o.member.id = :memberId order by o.createdDate desc")
+    @Query(value = "SELECT * FROM ORDERS WHERE MEMBER_ID = ?1 ORDER BY CREATED_DATE DESC LIMIT 1", nativeQuery = true)
     Order findLastOrderBy(Long memberId);
 }

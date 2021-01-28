@@ -4,12 +4,10 @@ import com.example.subject.member.dto.MemberResponse;
 import com.example.subject.order.domain.Order;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
 @Getter
-@NoArgsConstructor
 @AllArgsConstructor
 public class OrderResponse {
     private Long id;
@@ -18,7 +16,10 @@ public class OrderResponse {
     private MemberResponse memberResponse;
     private LocalDateTime createdDate;
 
-    public OrderResponse(Order order){
+    public OrderResponse(Order order) {
+        if (order == null) {
+            return;
+        }
         this.id = order.getId();
         this.orderNumber = order.getOrderNumber();
         this.productName = order.getProductName();

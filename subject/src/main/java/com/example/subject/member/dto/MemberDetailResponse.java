@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class MemberWithLastOrderResponse {
+public class MemberDetailResponse {
     private Long id;
     private String name;
     private String nickname;
@@ -21,7 +21,7 @@ public class MemberWithLastOrderResponse {
     private Gender gender;
     private OrderResponse lastOrder;
 
-    public MemberWithLastOrderResponse(Member member, Order order) {
+    public MemberDetailResponse(Member member, Order order) {
         this.id = member.getId();
         this.name = member.getName();
         this.nickname = member.getNickname();

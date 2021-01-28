@@ -1,6 +1,7 @@
 package com.example.subject.order.domain;
 
 import com.example.subject.member.domain.Member;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -8,7 +9,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity(name = "ORDERS")
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 public class Order {
 
