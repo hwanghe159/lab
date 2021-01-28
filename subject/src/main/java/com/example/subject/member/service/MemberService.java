@@ -5,6 +5,8 @@ import com.example.subject.member.dto.MemberCreateRequest;
 import com.example.subject.member.dto.MemberResponse;
 import com.example.subject.member.exception.NoSuchMemberException;
 import com.example.subject.member.repository.MemberRepository;
+import com.example.subject.order.domain.Order;
+import com.example.subject.order.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -12,7 +14,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @Transactional(readOnly = true)
@@ -20,6 +21,7 @@ import java.util.stream.Collectors;
 public class MemberService {
 
     private final MemberRepository memberRepository;
+    private final OrderRepository orderRepository;
 
     @Transactional
     public MemberResponse join(MemberCreateRequest request) {
@@ -35,8 +37,13 @@ public class MemberService {
 
     public List<MemberResponse> search(String name, String email, Pageable pageable) {
         Page<Member> members = memberRepository.findByNameOrEmail(name, email, pageable);
-        return members.get()
-                .map(MemberResponse::new)
-                .collect(Collectors.toList());
+        for (Member member : members) {
+            Order lastOrder = orderRepository.findLastOrderBy(member.getId());
+
+        }
+//        return members.get()
+//                .map(member -> new MemberWithLastOrderResponse(member, order))
+//                .collect(Collectors.toList());
+        return null;
     }
 }

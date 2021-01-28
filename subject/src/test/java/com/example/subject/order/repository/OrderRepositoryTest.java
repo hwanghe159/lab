@@ -1,18 +1,21 @@
 package com.example.subject.order.repository;
 
+import com.example.subject.member.domain.Gender;
 import com.example.subject.member.domain.Member;
 import com.example.subject.member.repository.MemberRepository;
 import com.example.subject.order.domain.Order;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
+import java.util.Arrays;
+
 import static com.example.subject.fixture.MemberFixture.*;
 import static com.example.subject.fixture.OrderFixture.TEST_ORDER_NAME;
 import static com.example.subject.fixture.OrderFixture.TEST_ORDER_NUMBER;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 @DataJpaTest
 class OrderRepositoryTest {
@@ -23,9 +26,12 @@ class OrderRepositoryTest {
     @Autowired
     private MemberRepository memberRepository;
 
-    @BeforeEach
-    void setUp() {
-        Member member = Member.builder()
+    private Member member;
+
+    @DisplayName("단일 회원 주문 목록 조회가 가능해야 한다")
+    @Test
+    void findByMemberIdTest() {
+        member = Member.builder()
                 .name(TEST_MEMBER_NAME)
                 .nickname(TEST_NICKNAME)
                 .password(TEST_PASSWORD)
@@ -36,11 +42,57 @@ class OrderRepositoryTest {
         Order order = new Order(TEST_ORDER_NUMBER, TEST_ORDER_NAME, member);
         memberRepository.save(member);
         orderRepository.save(order);
+        assertThat(orderRepository.findByMemberId(1L)).isNotEmpty();
     }
 
-    @DisplayName("단일 회원 주문 목록 조회가 가능해야 한다")
     @Test
-    void findByMemberIdTest() {
-        assertThat(orderRepository.findByMemberId(1L)).isNotEmpty();
+    void findByMemberTest() {
+        member = Member.builder()
+                .name(TEST_MEMBER_NAME)
+                .nickname(TEST_NICKNAME)
+                .password(TEST_PASSWORD)
+                .phoneNumber(TEST_PHONE_NUMBER)
+                .email(TEST_EMAIL)
+                .gender(TEST_GENDER)
+                .build();
+        Order order = new Order(TEST_ORDER_NUMBER, TEST_ORDER_NAME, member);
+        memberRepository.save(member);
+        orderRepository.save(order);
+        assertThat(orderRepository.findByMember(member)).isNotEmpty();
+    }
+
+    @Test
+    void findLastOrderBy() {
+        Member member1 = Member.builder()
+                .name("name1")
+                .nickname("nickname1")
+                .password("password1")
+                .phoneNumber("1")
+                .email("1@gmail.com")
+                .gender(Gender.MALE)
+                .build();
+        Member member2 = Member.builder()
+                .name("name2")
+                .nickname("nickname2")
+                .password("password2")
+                .phoneNumber("2")
+                .email("2@gmail.com")
+                .gender(Gender.MALE)
+                .build();
+        memberRepository.saveAll(Arrays.asList(member1, member2));
+
+        Order order1 = new Order("1", "이름1", member1);
+        Order order2 = new Order("2", "이름2", member1);
+        Order order3 = new Order("3", "이름3", member2);
+        Order order4 = new Order("4", "이름4", member2);
+        orderRepository.saveAll(Arrays.asList(order1, order2, order3, order4));
+
+        Order lastOrderOfMemberOne = orderRepository.findLastOrderBy(1L);
+        Order lastOrderOfMemberTwo = orderRepository.findLastOrderBy(2L);
+
+        assertAll(
+                () -> assertThat(lastOrderOfMemberOne.getOrderNumber()).isEqualTo("2"),
+                () -> assertThat(lastOrderOfMemberTwo.getOrderNumber()).isEqualTo("4")
+        );
     }
 }
