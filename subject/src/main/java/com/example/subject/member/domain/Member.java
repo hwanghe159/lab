@@ -33,6 +33,8 @@ public class Member {
 
     @Builder
     public Member(String name, String nickname, String password, String phoneNumber, String email, Gender gender) {
+        validateFields(name, nickname, password, phoneNumber, email);
+
         this.name = name;
         this.nickname = nickname;
         this.password = password;
@@ -43,5 +45,9 @@ public class Member {
 
     public boolean isCorrectPassword(String password) {
         return this.password.equals(password);
+    }
+
+    private void validateFields(String name, String nickname, String password, String phoneNumber, String email) {
+        //TODO : 정규표현식으로 검증
     }
 }

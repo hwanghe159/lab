@@ -19,6 +19,7 @@ import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.jdbc.Sql;
 
 import java.util.List;
 
@@ -27,6 +28,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@Sql("/truncate.sql")
 public class MemberAcceptanceTest {
 
     @LocalServerPort
@@ -64,7 +66,7 @@ public class MemberAcceptanceTest {
 
         //given: 회원이 20명 존재한다
         for (int i = 1; i <= 20; i++) {
-            join(TEST_MEMBER_NAME + i, TEST_NICKNAME + i, TEST_PASSWORD + i, TEST_PHONE_NUMBER + i, i + TEST_EMAIL, TEST_GENDER);
+            join(TEST_MEMBER_NAME, TEST_NICKNAME, TEST_PASSWORD, TEST_PHONE_NUMBER, i + TEST_EMAIL, TEST_GENDER);
         }
         //when: 이름, 이메일, 페이징을 이용하여 회원을 검색한다
         List<MemberResponse> members = search(TEST_MEMBER_NAME, TEST_EMAIL, PageRequest.of(2, 5));

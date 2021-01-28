@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -19,7 +20,7 @@ public class MemberController {
     private final MemberService memberService;
 
     @PostMapping("/members")
-    public ResponseEntity<Long> join(@RequestBody MemberCreateRequest request) {
+    public ResponseEntity<Long> join(@RequestBody @Valid MemberCreateRequest request) {
         MemberResponse memberResponse = memberService.join(request);
         return ResponseEntity.created(URI.create("/members/" + memberResponse.getId()))
                 .body(memberResponse.getId());

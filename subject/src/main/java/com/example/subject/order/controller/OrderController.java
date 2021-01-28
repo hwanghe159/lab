@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -22,7 +23,7 @@ public class OrderController {
     }
 
     @PostMapping("/members/{memberId}/orders")
-    public ResponseEntity<Long> create(@PathVariable String memberId, @RequestBody OrderCreateRequest request) {
+    public ResponseEntity<Long> create(@PathVariable String memberId, @RequestBody @Valid OrderCreateRequest request) {
         OrderResponse orderResponse = orderService.create(request);
         return ResponseEntity.created(URI.create("/members/" + memberId + "/orders/" + orderResponse.getId()))
                 .body(orderResponse.getId());
