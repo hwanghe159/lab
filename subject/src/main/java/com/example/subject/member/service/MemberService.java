@@ -9,6 +9,7 @@ import com.example.subject.member.repository.MemberRepository;
 import com.example.subject.order.domain.Order;
 import com.example.subject.order.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -38,6 +39,7 @@ public class MemberService {
                 .collect(Collectors.toList());
     }
 
+    @Cacheable(value = "getDetail", key = "#memberId")
     public MemberDetailResponse getDetail(Long memberId) {
         Member member = memberRepository.findById(memberId)
                 .orElseThrow(() -> new NoSuchMemberException(memberId));
