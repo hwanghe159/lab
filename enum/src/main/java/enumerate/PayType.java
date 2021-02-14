@@ -6,7 +6,7 @@ enum PayType {
     WEEKDAY((minsWorked, payRate) -> minsWorked <= PayType.MINS_PER_SHIFT ? 0 : (minsWorked - PayType.MINS_PER_SHIFT) * payRate / 2),
     WEEKEND((minsWorked, payRate) -> minsWorked * payRate / 2);
 
-    private BiFunction<Integer, Integer, Integer> overtimePay;
+    private final BiFunction<Integer, Integer, Integer> overtimePay;
 
     PayType(BiFunction<Integer, Integer, Integer> overtimePay) {
         this.overtimePay = overtimePay;
