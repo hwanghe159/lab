@@ -6,11 +6,36 @@ public class Order {
 
   private List<OrderLine> orderLines;
   private int totalAmounts;
+  private ShippingInfo shippingInfo;
+  private OrderState state;
+
+  public Order(List<OrderLine> orderLines, ShippingInfo shippingInfo) {
+    setOrderLines(orderLines);
+    setShippingInfo(shippingInfo);
+  }
+
+  public void changeShippingInfo(ShippingInfo newShippingInfo) {
+    verifyNotYetShipped();
+    setShippingInfo(newShippingInfo);
+  }
+
+  private void verifyNotYetShipped() {
+    if (state != OrderState.PAYMENT_WAITING && state != OrderState.PREPARING) {
+      throw new IllegalStateException("already shipped");
+    }
+  }
 
   private void setOrderLines(List<OrderLine> orderLines) {
     verifyAtLeastOneOrMoreOrderLines(orderLines);
     this.orderLines = orderLines;
     calculateTotalAmounts();
+  }
+
+  private void setShippingInfo(ShippingInfo shippingInfo) {
+    if (shippingInfo == null) {
+      throw new IllegalArgumentException("no ShippingInfo");
+    }
+    this.shippingInfo = shippingInfo;
   }
 
   private void verifyAtLeastOneOrMoreOrderLines(List<OrderLine> orderLines) {
@@ -20,7 +45,8 @@ public class Order {
   }
 
   private void calculateTotalAmounts() {
-    this.totalAmounts = new Money(orderLines.stream()
-        .mapToInt(x -> x.getAmounts().getValue()).sum());
+    this.totalAmounts = orderLines.stream()
+        .mapToInt(OrderLine::getAmounts)
+        .sum();
   }
 }
