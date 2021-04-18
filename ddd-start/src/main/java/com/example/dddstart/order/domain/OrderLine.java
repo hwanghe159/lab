@@ -2,23 +2,25 @@ package com.example.dddstart.order.domain;
 
 import com.example.dddstart.product.domain.Product;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 @Getter
+@RequiredArgsConstructor
 public class OrderLine {
 
-  private Product product;
-  private int price;
-  private int quantity;
-  private int amounts;
+  private final Product product;
+  private final Money price;
+  private final int quantity;
+  private final Money amounts;
 
-  public OrderLine(Product product, int price, int quantity, int amounts) {
+  public OrderLine(Product product, Money price, int quantity) {
     this.product = product;
     this.price = price;
     this.quantity = quantity;
     this.amounts = calculateAmounts();
   }
 
-  private int calculateAmounts() {
-    return this.price * this.quantity;
+  private Money calculateAmounts() {
+    return this.price.multiply(this.quantity);
   }
 }
