@@ -21,6 +21,11 @@ public class Order {
     setShippingInfo(newShippingInfo);
   }
 
+  public void cancel() {
+    verifyNotYetShipped();
+    this.state = OrderState.CANCELED;
+  }
+
   private void verifyNotYetShipped() {
     if (state != OrderState.PAYMENT_WAITING && state != OrderState.PREPARING) {
       throw new IllegalStateException("already shipped");
