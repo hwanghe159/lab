@@ -5,6 +5,6 @@ import lombok.Getter;
 @Getter
 public class Orderer {
 
+  private Long memberId;
   private String name;
-  private String email;
 }
