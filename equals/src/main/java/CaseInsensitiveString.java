@@ -7,6 +7,7 @@ public final class CaseInsensitiveString {
         this.s = Objects.requireNonNull(s);
     }
 
+    //대칭성 위반
     @Override
     public boolean equals(Object o) {
         if (o instanceof CaseInsensitiveString)
