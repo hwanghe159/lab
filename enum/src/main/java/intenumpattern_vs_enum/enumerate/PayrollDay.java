@@ -1,6 +1,6 @@
-package enumerate;
+package intenumpattern_vs_enum.enumerate;
 
-import static enumerate.PayType.*;
+import static intenumpattern_vs_enum.enumerate.PayType.*;
 
 enum PayrollDay {
     MONDAY(WEEKDAY), TUESDAY(WEEKDAY), WEDNESDAY(WEEKDAY),

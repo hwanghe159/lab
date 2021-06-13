@@ -1,4 +1,4 @@
-package enumerate;
+package intenumpattern_vs_enum.enumerate;
 
 import java.util.Map;
 import java.util.Optional;

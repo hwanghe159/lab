@@ -1,4 +1,4 @@
-package intenumpattern;
+package intenumpattern_vs_enum.intenumpattern;
 
 public class Calculator {
 

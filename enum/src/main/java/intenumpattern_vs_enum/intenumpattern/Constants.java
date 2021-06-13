@@ -1,4 +1,4 @@
-package intenumpattern;
+package intenumpattern_vs_enum.intenumpattern;
 
 public class Constants {
     public static final int APPLE_FUJI = 0;

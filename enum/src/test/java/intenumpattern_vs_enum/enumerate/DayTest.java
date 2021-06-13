@@ -1,4 +1,4 @@
-package enumerate;
+package intenumpattern_vs_enum.enumerate;
 
 import org.junit.jupiter.api.Test;
 

@@ -1,9 +1,9 @@
-package enumerate;
+package intenumpattern_vs_enum.enumerate;
 
 import java.util.function.Function;
 
-import static enumerate.Day.DayType.WEEKDAY;
-import static enumerate.Day.DayType.WEEKEND;
+import static intenumpattern_vs_enum.enumerate.Day.DayType.WEEKDAY;
+import static intenumpattern_vs_enum.enumerate.Day.DayType.WEEKEND;
 
 public enum Day {
     MONDAY("월요일", WEEKDAY),
