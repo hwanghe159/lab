@@ -65,7 +65,7 @@ public class JdbcPagingJobConfig {
         .build();
   }
 
-
+  // 제공되는 DataSource로 작업 중인 데이터베이스 타입을 결정한다
   @Bean
   public SqlPagingQueryProviderFactoryBean pagingQueryProvider(DataSource dataSource) {
     SqlPagingQueryProviderFactoryBean factoryBean = new SqlPagingQueryProviderFactoryBean();
