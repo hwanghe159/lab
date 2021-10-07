@@ -1,4 +1,4 @@
-package com.example.springdatamongodb;
+package com.example.storedprocedure;
 
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.boot.SpringApplication;
@@ -6,10 +6,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @EnableBatchProcessing
 @SpringBootApplication
-public class SpringdatamongodbApplication {
+public class StoredprocedureApplication {
 
   public static void main(String[] args) {
-    SpringApplication.run(SpringdatamongodbApplication.class, args);
+    SpringApplication.run(StoredprocedureApplication.class, args);
   }
 
 }

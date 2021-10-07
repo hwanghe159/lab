@@ -50,7 +50,7 @@ public class HibernatePagingJobConfig {
     return new HibernatePagingItemReaderBuilder<Customer>()
         .name("hibernatePagingItemReader")
         .sessionFactory(entityManagerFactory.unwrap(SessionFactory.class))
-        .queryString("from Customer where city = :city")
+        .queryString("from Customer where city = :city order by lastName")
         .parameterValues(Collections.singletonMap("city", city))
         .pageSize(10)
         .build();
