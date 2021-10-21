@@ -1,6 +1,7 @@
 package com.example.jdbc.paging;
 
 import com.example.jdbc.Customer;
+import com.example.jdbc.CustomerItemPreparedStatementSetter;
 import com.example.jdbc.CustomerRowMapper;
 import java.util.HashMap;
 import java.util.Map;
@@ -11,8 +12,10 @@ import org.springframework.batch.core.configuration.annotation.JobBuilderFactory
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.item.ItemWriter;
+import org.springframework.batch.item.database.JdbcBatchItemWriter;
 import org.springframework.batch.item.database.JdbcPagingItemReader;
 import org.springframework.batch.item.database.PagingQueryProvider;
+import org.springframework.batch.item.database.builder.JdbcBatchItemWriterBuilder;
 import org.springframework.batch.item.database.builder.JdbcPagingItemReaderBuilder;
 import org.springframework.batch.item.database.support.SqlPagingQueryProviderFactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,5 +83,16 @@ public class JdbcPagingJobConfig {
   @Bean
   public ItemWriter<Customer> jdbcPagingItemWriter() {
     return items -> items.forEach(System.out::println);
+  }
+
+  @Bean
+  @StepScope
+  public JdbcBatchItemWriter<Customer> jdbcCustomerWriter(DataSource dataSource) throws Exception {
+    return new JdbcBatchItemWriterBuilder<Customer>()
+        .dataSource(dataSource)
+        .sql("INSERT INTO CUSTOMER (first_name, middle_name, last_name, address, city, state, zip_code) VALUES (?, ?, ?, ?, ?, ?, ?)")
+        .itemPreparedStatementSetter(new CustomerItemPreparedStatementSetter())
+        .itemSqlParameterSourceProvider()
+        .build();
   }
 }
