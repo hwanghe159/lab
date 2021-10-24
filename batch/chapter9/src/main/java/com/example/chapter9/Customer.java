@@ -1,8 +1,10 @@
 package com.example.chapter9;
 
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
+@Setter
 public class Customer {
 
   private static final long serialVersionUID = 1L;
