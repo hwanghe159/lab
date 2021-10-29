@@ -1,6 +1,7 @@
 package com.example.chapter9.reader;
 
 import com.example.chapter9.Customer;
+import com.example.chapter9.CustomerEntity;
 import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.item.file.FlatFileItemReader;
 import org.springframework.batch.item.file.builder.FlatFileItemReaderBuilder;
@@ -23,6 +24,20 @@ public class CustomerFileReaderConfig {
         .delimited()
         .names("firstName", "middleInitial", "lastName", "address", "city", "state", "zip")
         .targetType(Customer.class)
+        .build();
+  }
+
+  @Bean
+  @StepScope
+  public FlatFileItemReader<CustomerEntity> customerEntityFileReader(
+      @Value("#{jobParameters['customerFile']}") Resource inputFile
+  ) {
+    return new FlatFileItemReaderBuilder<CustomerEntity>()
+        .name("customerItemReader")
+        .resource(inputFile)
+        .delimited()
+        .names("firstName", "middleInitial", "lastName", "address", "city", "state", "zip")
+        .targetType(CustomerEntity.class)
         .build();
   }
 }

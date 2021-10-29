@@ -1,4 +1,8 @@
 spring:
+  jpa:
+    properties:
+      hibernate:
+        current_session_context_class: org.springframework.orm.hibernate5.SpringSessionContext
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/study?serverTimezone=Asia/Seoul
