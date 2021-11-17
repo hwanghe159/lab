@@ -94,4 +94,21 @@ public class XmlFileJobConfig {
         .classifier(classifier)
         .build();
   }
+
+  @AllArgsConstructor
+  private static class CustomerClassifier implements
+      Classifier<Customer, ItemWriter<? super Customer>> {
+
+    private ItemWriter<Customer> fileItemWriter;
+    private ItemWriter<Customer> jdbcItemWriter;
+
+    @Override
+    public ItemWriter<Customer> classify(Customer customer) {
+      if (customer.getState().matches("^[A-M].*")) {
+        return fileItemWriter;
+      } else {
+        return jdbcItemWriter;
+      }
+    }
+  }
 }
