@@ -3,6 +3,7 @@ package com.example.chapter9.job;
 import com.example.chapter9.Customer;
 import java.util.HashMap;
 import java.util.Map;
+import lombok.AllArgsConstructor;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
@@ -79,8 +80,8 @@ public class XmlFileJobConfig {
   public Step classifierCompositeWriterStep() {
     return this.stepBuilderFactory.get("classifierCompositeWriterStep")
         .<Customer, Customer>chunk(10)
-        .reader(...)
-				.writer(classifierCompositeItemWriter())
+        .reader(customerFileReader)
+        .writer(classifierCompositeItemWriter())
         .stream(xmlItemWriter())
         .build();
   }
