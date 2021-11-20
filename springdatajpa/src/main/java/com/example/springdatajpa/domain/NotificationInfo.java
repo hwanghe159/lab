@@ -16,9 +16,7 @@ public class NotificationInfo {
   private String message;
   private String title;
   private String imageUrl;
-  private String trackingTag;
   private Long expireTime;
-  private Boolean isScreenPush;
   private LinkInfo link;
   private Map<String, Object> custom;
 }
