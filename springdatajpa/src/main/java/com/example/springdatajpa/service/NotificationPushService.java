@@ -14,6 +14,7 @@ public class NotificationPushService {
   private final NotificationPushRepository notificationPushRepository;
 
   public NotificationPush save(NotificationPush notificationPush) {
-    return notificationPushRepository.save(notificationPush);
+    NotificationPush savedPush = notificationPushRepository.save(notificationPush);
+    return savedPush;
   }
 }
