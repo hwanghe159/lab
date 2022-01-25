@@ -1,4 +1,6 @@
 import Color.*
+import java.io.BufferedReader
+import java.util.*
 
 fun main(args: Array<String>) {
     val persons = listOf(Person("영희", 24, true), Person("철수", age = 20, false))
@@ -12,6 +14,18 @@ fun main(args: Array<String>) {
     println("Hello, ${if (args.size > 0) args[0] else "someone"}!")
     val rectangle = Rectangle(41, 43)
     println(getKorean(VIOLET))
+    for (i in 0 until 100) {
+        println(i)
+    }
+
+    val binaryReps = TreeMap<Char, String>()
+    for (c in 'A'..'F') {
+        val binary = Integer.toBinaryString(c.toInt())
+        binaryReps[c] = binary
+    }
+    for ((letter, binary) in binaryReps) {
+        println("$letter = $binary")
+    }
 
 }
 
@@ -39,3 +53,23 @@ fun mix(c1: Color, c2: Color) =
         setOf(BLUE, VIOLET) -> INDIGO
         else -> throw Exception("Dirty color")
     }
+
+fun readNumber(reader: BufferedReader): Int? {
+    try {
+        val line = reader.readLine()
+        return Integer.parseInt(line)
+    } catch (e: NumberFormatException) {
+        return null
+    } finally {
+        reader.close()
+    }
+}
+
+fun readNumber2(reader: BufferedReader): Int? {
+    return try {
+        val line = reader.readLine()
+        Integer.parseInt(line)
+    } catch (e: NumberFormatException) {
+        null
+    }
+}
