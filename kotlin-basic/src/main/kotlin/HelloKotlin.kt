@@ -27,6 +27,9 @@ fun main(args: Array<String>) {
         println("$letter = $binary")
     }
 
+    val numbers = setOf(1, 14, 2)
+    numbers.max()
+    println(joinToString(numbers, separator = "; ", prefix = "(", postfix = ")"))
 }
 
 fun getKorean(color: Color) =
@@ -72,4 +75,21 @@ fun readNumber2(reader: BufferedReader): Int? {
     } catch (e: NumberFormatException) {
         null
     }
+}
+
+fun <T> joinToString(
+    collection: Collection<T>,
+    separator: String,
+    prefix: String,
+    postfix: String
+): String {
+    val result = StringBuilder(prefix)
+    for ((index, element) in collection.withIndex()) {
+        if (index > 0) {
+            result.append(separator)
+        }
+        result.append(element)
+    }
+    result.append(postfix)
+    return result.toString()
 }
