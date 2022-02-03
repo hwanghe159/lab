@@ -30,6 +30,7 @@ fun main(args: Array<String>) {
     val numbers = setOf(1, 14, 2)
     numbers.max()
     println(joinToString(numbers, separator = "; ", prefix = "(", postfix = ")"))
+    println(joinToString(numbers, postfix = ";", prefix = "# "))
 }
 
 fun getKorean(color: Color) =
@@ -79,9 +80,9 @@ fun readNumber2(reader: BufferedReader): Int? {
 
 fun <T> joinToString(
     collection: Collection<T>,
-    separator: String,
-    prefix: String,
-    postfix: String
+    separator: String = ", ",
+    prefix: String = "",
+    postfix: String = ""
 ): String {
     val result = StringBuilder(prefix)
     for ((index, element) in collection.withIndex()) {
