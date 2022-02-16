@@ -29,8 +29,20 @@ fun main(args: Array<String>) {
 
     val numbers = setOf(1, 14, 2)
     numbers.max()
-    println(joinToString(numbers, separator = "; ", prefix = "(", postfix = ")"))
-    println(joinToString(numbers, postfix = ";", prefix = "# "))
+
+    val view1: View = Button()
+    view1.click()
+    view1.showOff()
+    val view2 = View()
+    view2.click()
+    view2.showOff()
+
+    val list = listOf(1, 2, 3, 4)
+    val array = arrayOf(1, 2, 3, 4)
+    val listOf = listOf(1, 2, 3, *array)
+    println(listOf)
+
+
 }
 
 fun getKorean(color: Color) =
@@ -78,19 +90,13 @@ fun readNumber2(reader: BufferedReader): Int? {
     }
 }
 
-fun <T> joinToString(
-    collection: Collection<T>,
-    separator: String = ", ",
-    prefix: String = "",
-    postfix: String = ""
-): String {
-    val result = StringBuilder(prefix)
-    for ((index, element) in collection.withIndex()) {
-        if (index > 0) {
-            result.append(separator)
-        }
-        result.append(element)
-    }
-    result.append(postfix)
-    return result.toString()
+open class View {
+    open fun click() = println("View clicked")
 }
+
+class Button : View() {
+    override fun click() = println("Button clicked")
+}
+
+fun View.showOff() = println("I'm a view!")
+fun Button.showOff() = println("I'm a button!")

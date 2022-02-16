@@ -1,6 +1,2 @@
-class Rectangle(val height: Int, val width: Int) {
-    val isSquare: Boolean
-        get() {
-            return height == width
-        }
+class Rectangle(private val height: Int, private val width: Int) {
 }
