@@ -1,2 +1,4 @@
 rootProject.name = 'book-object'
 
+include 'theater'
+include 'movie-reservation'

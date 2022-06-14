@@ -1,22 +1,20 @@
-plugins {
-    id 'java'
-}
+subprojects {
+    group 'org.example'
+    version '1.0-SNAPSHOT'
 
-group 'org.example'
-version '1.0-SNAPSHOT'
+    apply plugin: 'java'
 
-repositories {
-    mavenCentral()
-}
+    sourceCompatibility = 11
 
-dependencies {
-    compileOnly 'org.projectlombok:lombok:1.18.20'
-    annotationProcessor 'org.projectlombok:lombok:1.18.20'
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
-    testImplementation 'org.assertj:assertj-core:3.21.0'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
-}
+    repositories {
+        mavenCentral()
+    }
 
-test {
-    useJUnitPlatform()
+    dependencies {
+        compileOnly 'org.projectlombok:lombok:1.18.20'
+        annotationProcessor 'org.projectlombok:lombok:1.18.20'
+        testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
+        testImplementation 'org.assertj:assertj-core:3.21.0'
+        testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+    }
 }
