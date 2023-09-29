@@ -1,0 +1,14 @@
+- 프로젝트 루트로 이동
+  - `cd Documents/GitHub/lab/docker`
+- 빌드하여 jar 생성
+  - `./gradlew clean bootJar` 
+- 도커 이미지 빌드
+  - `docker build -t docker-example:0.0.1 .`
+  - `docker build -t <이미지 이름> <Dockerfile 경로>`
+- 도커 이미지 실행
+  - `docker run -d --name docker-example -p 8080:8080 docker-example:0.0.1`
+  - `-d` : 데몬 모드
+  - `--name` : 컨테이너 이름 지정
+  - `-p` : 호스트와 컨테이너의 포트를 연결함. `-p <호스트 포트>:<컨테이너 포트>`
+- 현재 실행중인 컨테이너 확인
+  - `docker ps` 
