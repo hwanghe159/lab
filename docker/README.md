@@ -6,9 +6,18 @@
   - `docker build -t docker-example:0.0.1 .`
   - `docker build -t <이미지 이름> <Dockerfile 경로>`
 - 도커 이미지 실행
-  - `docker run -d --name docker-example -p 8080:8080 docker-example:0.0.1`
+  - `docker run -d -p 8080:8080 -m 3300m docker-example:0.0.1`
   - `-d` : 데몬 모드
   - `--name` : 컨테이너 이름 지정
   - `-p` : 호스트와 컨테이너의 포트를 연결함. `-p <호스트 포트>:<컨테이너 포트>`
 - 현재 실행중인 컨테이너 확인
-  - `docker ps` 
+  - `docker ps`
+- 컨테이너 내부 접속
+  - `docker exec -it <컨테이너id> /bin/bash`
+  - `-i` : 표준입출력 STDIN를 열겠다는 의미
+  - `-t` : 가상 tty(pseudo tty)를 통해 접속하겠다는 의미 
+  - 컨테이너에서 `/bin/bash` 명령 실행
+- 컨테이너 탈출
+  - `exit` 
+- 컨테이너 정보 출력
+  - `docker stats <컨테이너id>` 

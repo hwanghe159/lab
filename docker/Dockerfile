@@ -4,4 +4,4 @@ FROM openjdk:17
 # 컨테이너 안으로 복사
 COPY build/libs/docker-0.0.1-SNAPSHOT.jar docker.jar
 
-ENTRYPOINT ["java", "-jar", "/docker.jar"]
+ENTRYPOINT ["java", "-Xms3000m", "-Xmx3000m", "-jar", "/docker.jar"]
