@@ -19,7 +19,7 @@ class Case3LearningTest {
   @Autowired
   private Parent3Service parent3Service;
 
-  @DisplayName("child.setParent(null)를 하나 안하나 연관관계는 끊어지고 delete문은 안나감")
+  @DisplayName("child.setParent(null) 또는 parent.getChildren().remove(child) 하나만 해도 연관관계는 끊어지고 delete문은 안나감")
   @Test
   void setParent() {
     Parent3 parent = parent3Service.saveParent("부모");

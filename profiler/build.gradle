@@ -28,6 +28,3 @@ dependencies {
 tasks.named('test') {
     useJUnitPlatform()
 }
-
-apply plugin: 'application'
-applicationDefaultJvmArgs = ["-XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/dump"]

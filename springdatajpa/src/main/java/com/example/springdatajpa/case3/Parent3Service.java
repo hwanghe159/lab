@@ -44,6 +44,6 @@ public class Parent3Service {
         .findFirst()
         .orElseThrow(RuntimeException::new);
     child.setParent(null);
-    parent.getChildren().remove(child);
+//    parent.getChildren().remove(child);
   }
 }
